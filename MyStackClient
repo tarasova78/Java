@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class MyStackClient {
+    public static void main(String[] args) {
+        MyStack stack = new MyStack(); // Создаем экземпляр MyStack
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Введите 5 строк:");
+
+        // Принимаем 5 строк от пользователя
+        for (int i = 0; i < 5; i++) {
+            String input = scanner.nextLine();
+            stack.push(input); // Добавляем строку в стек
+        }
+
+        System.out.println("\nСтроки в обратном порядке:");
+
+        // Печатаем строки в обратном порядке
+        while (!stack.isEmpty()) {
+            System.out.println(stack.pop()); // Удаляем и выводим элемент на вершине стека
+        }
+
+        scanner.close(); // Закрываем сканер
+    }
+}
