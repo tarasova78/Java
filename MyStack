@@ -1,18 +1,9 @@
-import numpy as np
-
 def main(A):
-    A = np.array(list(A))  # Преобразуем во множество и затем в массив NumPy
+    H = set(map(lambda a: abs(a) + 5 * a, filter(lambda a: a > 97 or a <= -16, A)))
+    O_set = set(map(lambda a: abs(a) + a ** 2, filter(lambda a: a >= -96, A)))
+    T = set(map(lambda o: o ** 2, filter(lambda o: o > 89 or o <= -2, O_set)))
 
-    H = np.abs(A) + 5 * A
-    H = H[(A > 97) | (A <= -16)]
-
-    O_set = np.abs(A) + A ** 2
-    O_set = O_set[A >= -96]
-
-    T = O_set ** 2
-    T = T[(O_set > 89) | (O_set <= -2)]
-
-    return len(set(H) | set(T)) - np.sum(T // 7)
+    return len(H | T) - sum(map(lambda p: p // 7, T))
 
 # Примеры:
 A1 = {-62, -26, 7, 42, -80, -16, -13, -76, -39, 28}
