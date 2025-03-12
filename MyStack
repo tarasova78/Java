@@ -1,22 +1,26 @@
-def calculate_mu(A):
-    # Вычисляем множество H
-    H = {abs(a) + 5 * a for a in A if a > 97 or a <= -16}
+def main(A):
+    H = set()
+    for a in A:
+        if a > 97 or a <= -16:
+            H.add(abs(a) + 5 * a)
     
-    # Вычисляем множество O
-    O = {abs(a) + a ** 2 for a in A if a >= -96}
+    O_set = set()
+    for a in A:
+        if a >= -96:
+            O_set.add(abs(a) + a ** 2)
     
-    # Вычисляем множество T
-    T = {o ** 2 for o in O if o > 89 or o <= -2}
-    
+    T = set()
+    for o in O_set:
+        if o > 89 or o <= -2:
+            T.add(o ** 2)
+
     # Вычисляем итоговое значение
     mu = len(H | T) - sum(p // 7 for p in T)
     
     return mu
 
-# Примеры из условия:
+# Примеры:
 A1 = {-62, -26, 7, 42, -80, -16, -13, -76, -39, 28}
 A2 = {37, -27, 8, 41, 74, -50, 78, -13, 94}
 
-# Вывод результатов:
-print("mu(A1) =", calculate_mu(A1))
-print("mu(A2) =", calculate_mu(A2))
+print
