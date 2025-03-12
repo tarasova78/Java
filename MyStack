@@ -1,26 +1,23 @@
-def main(A):
-    H = set()
-    for a in A:
-        if a > 97 or a <= -16:
-            H.add(abs(a) + 5 * a)
-    
-    O_set = set()
-    for a in A:
-        if a >= -96:
-            O_set.add(abs(a) + a ** 2)
-    
-    T = set()
-    for o in O_set:
-        if o > 89 or o <= -2:
-            T.add(o ** 2)
+def compute_H(A):
+    return set(map(lambda a: abs(a) + 5 * a, filter(lambda a: a > 97 or a <= -16, A)))
 
-    # Вычисляем итоговое значение
-    mu = len(H | T) - sum(p // 7 for p in T)
-    
-    return mu
+def compute_O(A):
+    return set(map(lambda a: abs(a) + a ** 2, filter(lambda a: a >= -96, A)))
+
+def compute_T(O_set):
+    return set(map(lambda o: o ** 2, filter(lambda o: o > 89 or o <= -2, O_set)))
+
+def main(A):
+    H = compute_H(A)
+    O_set = compute_O(A)
+    T = compute_T(O_set)
+
+    return len(H | T) - sum(map(lambda p: p // 7, T))
 
 # Примеры:
 A1 = {-62, -26, 7, 42, -80, -16, -13, -76, -39, 28}
 A2 = {37, -27, 8, 41, 74, -50, 78, -13, 94}
 
-print
+print("main(A1) =", main(A1))
+print("main(A2) =", main(A2))
+
